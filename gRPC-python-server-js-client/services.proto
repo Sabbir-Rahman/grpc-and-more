@@ -1,0 +1,66 @@
+// services.proto
+syntax = "proto3";
+
+package services;
+
+service CombinedService {
+  // Unary
+  rpc GetResponse (UnaryRequest) returns (UnaryResponse);
+
+  // Client Streaming
+  rpc SendMessages (stream ClientStreamingRequest) returns (ClientStreamingResponse);
+
+  // Server Streaming
+  rpc GetMessages (ServerStreamingRequest) returns (stream ServerStreamingResponse);
+
+  // Bidirectional Streaming
+  rpc Chat (stream BidiStreamingRequest) returns (stream BidiStreamingResponse);
+
+  rpc GetRandomObject (RandomObjectRequest) returns (RandomObject);
+
+}
+
+message RandomObjectRequest {
+  int32 outerObjectCount = 1;
+  int32 innerObjectCount = 2;
+}
+
+message RandomObject {
+  map<string, NestedObject> properties = 1;
+}
+
+message NestedObject {
+  map<string, int32> objects = 1;
+}
+
+message UnaryRequest {
+  string message = 1;
+}
+
+message UnaryResponse {
+  string reply = 1;
+}
+
+message ClientStreamingRequest {
+  string message = 1;
+}
+
+message ClientStreamingResponse {
+  string reply = 1;
+}
+
+message ServerStreamingRequest {
+  string message = 1;
+}
+
+message ServerStreamingResponse {
+  string reply = 1;
+}
+
+message BidiStreamingRequest {
+  string message = 1;
+}
+
+message BidiStreamingResponse {
+  string reply = 1;
+}

@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+option go_package = "./";
+
+package largearray;
+
+service LargeArrayService {
+  rpc GetLargeArray (Empty) returns (LargeArrayResponse);
+}
+
+message Empty {}
+
+message LargeArrayResponse {
+  repeated LargeObject objects = 1;
+}
+
+message LargeObject {
+  int32 id = 1;
+  string name = 2;
+  float value = 3;
+  bool active = 4;
+  repeated string tags = 5;
+}
